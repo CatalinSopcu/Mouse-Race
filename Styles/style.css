@@ -1,0 +1,84 @@
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.game_container {
+    border: 2px solid black;
+    border-radius: 4px;
+    height: 300px;
+    width: 300px;
+}
+
+.game_container .start_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.game_container .start_container hr {
+    background: black;
+    width: 75%;
+    height: 1px;
+    background: gray;
+    border: none;
+}
+
+.game_container .start_container h2 {
+    margin: 0 5px;
+    font-size: 35px;
+}
+
+.game_container .start_container p {
+    margin: 0 5px;
+    color:gray;
+    font-size:12px;
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.8s, opacity 0.8s linear;
+}
+
+
+
+
+.play_container {
+    width: 300px;
+    height: 300px;
+    flex-direction: column;
+}
+
+.play_container  .play_component {
+    width: 300px;
+    height: 260px;
+}
+.play_container  .score_component {
+    background: gray;
+    flex: 1 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 2px solid black;
+}
+
+.play_container  #score_counter {
+    background: white;
+    padding: 5px;
+    width: 50%;
+    align-text: center;
+    text-align: center;
+    border-radius: 2px;
+}
