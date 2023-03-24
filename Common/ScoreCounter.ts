@@ -1,4 +1,3 @@
-
 export class ScoreCounter {
     private counter: number = 0;
     constructor() { }

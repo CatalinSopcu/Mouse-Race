@@ -1,15 +1,10 @@
-﻿import { ScoreCounter } from "./Classes/ScoreCounter";
+﻿import { ScoreCounter } from "./Common/ScoreCounter";
 const startContainer = document.querySelector(".start_container") as HTMLElement;
 
 startContainer.addEventListener("click", function () {
     startContainer.classList.add("hidden");
     setTimeout(function () {
-        /*let counter = 1;
-        setInterval(function () {
-            counter++;
-            document.getElementById("score_counter")!.innerHTML = "Score: " + counter;
-        }, 1000);*/
-        
+
 
         // Create an instance of the ScoreCounter class
         const scoreCounter = new ScoreCounter();

@@ -6,6 +6,10 @@
   },
   "files": [
     "test.ts",
-    "Classes/ScoreCounter.ts"
+    "Common/ScoreCounter.ts",
+    "Common/GameComponents/Element.ts",
+    "Common/GameComponents/Chase.ts",
+    "Common/GameComponents/Random.ts",
+    "Common/GameComponents/Escape.ts"
   ]
 }
