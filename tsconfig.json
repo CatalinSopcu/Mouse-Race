@@ -10,6 +10,7 @@
     "Common/GameComponents/Element.ts",
     "Common/GameComponents/Chase.ts",
     "Common/GameComponents/Random.ts",
-    "Common/GameComponents/Escape.ts"
+    "Common/GameComponents/Escape.ts",
+    "Common/Constants/CanvasConstants.ts"
   ]
 }

@@ -4,19 +4,40 @@ export class Transform{
     private Size: Vector2;
     private Position: Vector2;
     private Velocity: Vector2;
+    private Color: string;
 
-    constructor() { }
+    constructor() {
+        this.Size = new Vector2(0, 0);
+        this.Position = new Vector2(0, 0);
+        this.Velocity = new Vector2(0, 0);
+    }
 
     public getSize(): Vector2 {
         return this.Size;
+    }
+
+    public setSize(newSize: Vector2): void {
+        this.Size = newSize;
     }
 
     public getPosition(): Vector2 {
         return this.Position;
     }
 
+    public setPosition(newPos: Vector2): void {
+        this.Position = newPos;
+    }
+
     public getVelocity(): Vector2 {
         return this.Velocity;
+    }
+
+    public getColor(): string {
+        return this.Color;
+    }
+    
+    public setColor(newColor: string): void {
+        this.Color = newColor;
     }
 
     public collide(other: Transform): boolean {

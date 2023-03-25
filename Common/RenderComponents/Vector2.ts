@@ -2,5 +2,8 @@ export class Vector2 {
     public X: number;
     public Y: number;
 
-    constructor() { }
+    constructor(x: number, y: number) {
+        this.X = x;
+        this.Y = y;
+    }
 }

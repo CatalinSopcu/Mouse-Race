@@ -10,7 +10,7 @@ export class ScoreCounter {
         console.log("asd");
     }
 
-    public addScore(addValue): void {
+    public addScore(addValue: number): void {
         this.counter += addValue;
     }
 

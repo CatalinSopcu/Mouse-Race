@@ -10,6 +10,56 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./Common/Constants/CanvasConstants.ts":
+/*!*********************************************!*\
+  !*** ./Common/Constants/CanvasConstants.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.CanvasConstants = void 0;\nvar CanvasConstants = exports.CanvasConstants = /** @class */ (function () {\n    function CanvasConstants() {\n    }\n    CanvasConstants.WIDTH = 300;\n    CanvasConstants.HEIGHT = 260;\n    return CanvasConstants;\n}());\n\n\n//# sourceURL=webpack://Assigment/./Common/Constants/CanvasConstants.ts?");
+
+/***/ }),
+
+/***/ "./Common/Player.ts":
+/*!**************************!*\
+  !*** ./Common/Player.ts ***!
+  \**************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.Player = void 0;\nvar Transform_1 = __webpack_require__(/*! ./RenderComponents/Transform */ \"./Common/RenderComponents/Transform.ts\");\nvar Vector2_1 = __webpack_require__(/*! ./RenderComponents/Vector2 */ \"./Common/RenderComponents/Vector2.ts\");\nvar Canvas_1 = __webpack_require__(/*! ./RenderComponents/Canvas */ \"./Common/RenderComponents/Canvas.ts\");\nvar CanvasConstants_1 = __webpack_require__(/*! ./Constants/CanvasConstants */ \"./Common/Constants/CanvasConstants.ts\");\nvar Player = /** @class */ (function () {\n    function Player() {\n        this.Transform = new Transform_1.Transform();\n        this.Canvas = new Canvas_1.Canvas();\n        this.PLAYER_XSIZE = 20;\n        this.PLAYER_YSIZE = 20;\n        this.PLAYER_COLOR = \"brown\";\n        this.Transform.setSize(new Vector2_1.Vector2(this.PLAYER_XSIZE, this.PLAYER_YSIZE));\n        this.Transform.setColor(this.PLAYER_COLOR);\n        this.setMouseOverEvent();\n    }\n    Player.prototype.render = function () {\n        this.Canvas.draw(this.Transform);\n    };\n    Player.prototype.getTransform = function () {\n        return this.Transform;\n    };\n    Player.prototype.setMouseOverEvent = function () {\n        var _this = this;\n        window.addEventListener('mousemove', function (event) {\n            var playerSize = _this.Transform.getSize();\n            var canvasRect = _this.Canvas.getRectangle();\n            var mouseX = event.clientX - canvasRect.left;\n            var mouseY = event.clientY - canvasRect.top;\n            var posX = Math.min(Math.max(mouseX - playerSize.X / 2, 0), CanvasConstants_1.CanvasConstants.WIDTH - playerSize.X);\n            var posY = Math.min(Math.max(mouseY - playerSize.Y / 2, 0), CanvasConstants_1.CanvasConstants.HEIGHT - playerSize.Y);\n            var newPos = new Vector2_1.Vector2(posX, posY);\n            _this.Transform.setPosition(newPos);\n        });\n    };\n    return Player;\n}());\nexports.Player = Player;\n\n\n//# sourceURL=webpack://Assigment/./Common/Player.ts?");
+
+/***/ }),
+
+/***/ "./Common/RenderComponents/Canvas.ts":
+/*!*******************************************!*\
+  !*** ./Common/RenderComponents/Canvas.ts ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.Canvas = void 0;\nvar Canvas = /** @class */ (function () {\n    function Canvas() {\n        this.Canvas = document.querySelector('canvas');\n        this.Canvas.width = 300;\n        this.Canvas.height = 260;\n    }\n    Canvas.prototype.draw = function (transform) {\n        var objPos = transform.getPosition();\n        var objSize = transform.getSize();\n        var objColor = transform.getColor();\n        var ctx = this.Canvas.getContext('2d');\n        ctx.fillStyle = objColor;\n        ctx.fillRect(objPos.X, objPos.Y, objSize.X, objSize.Y);\n    };\n    Canvas.prototype.clear = function () {\n        var ctx = this.Canvas.getContext('2d');\n        ctx.clearRect(0, 0, this.Canvas.width, this.Canvas.height);\n    };\n    Canvas.prototype.getRectangle = function () {\n        var canvasRect = this.Canvas.getBoundingClientRect();\n        return canvasRect;\n    };\n    return Canvas;\n}());\nexports.Canvas = Canvas;\n\n\n//# sourceURL=webpack://Assigment/./Common/RenderComponents/Canvas.ts?");
+
+/***/ }),
+
+/***/ "./Common/RenderComponents/Transform.ts":
+/*!**********************************************!*\
+  !*** ./Common/RenderComponents/Transform.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.Transform = void 0;\nvar Vector2_1 = __webpack_require__(/*! ./Vector2 */ \"./Common/RenderComponents/Vector2.ts\");\nvar Transform = /** @class */ (function () {\n    function Transform() {\n        this.Size = new Vector2_1.Vector2(0, 0);\n        this.Position = new Vector2_1.Vector2(0, 0);\n        this.Velocity = new Vector2_1.Vector2(0, 0);\n    }\n    Transform.prototype.getSize = function () {\n        return this.Size;\n    };\n    Transform.prototype.setSize = function (newSize) {\n        this.Size = newSize;\n    };\n    Transform.prototype.getPosition = function () {\n        return this.Position;\n    };\n    Transform.prototype.setPosition = function (newPos) {\n        this.Position = newPos;\n    };\n    Transform.prototype.getVelocity = function () {\n        return this.Velocity;\n    };\n    Transform.prototype.getColor = function () {\n        return this.Color;\n    };\n    Transform.prototype.setColor = function (newColor) {\n        this.Color = newColor;\n    };\n    Transform.prototype.collide = function (other) {\n        var thisPos = this.Position;\n        var thisSize = this.Size;\n        var otherPos = other.getPosition();\n        var otherSize = other.getSize();\n        return (thisPos.X < otherPos.X + otherSize.X &&\n            thisPos.X + thisSize.X > otherPos.X &&\n            thisPos.Y < otherPos.Y + otherSize.Y &&\n            thisPos.Y + thisSize.Y > otherPos.Y);\n    };\n    return Transform;\n}());\nexports.Transform = Transform;\n\n\n//# sourceURL=webpack://Assigment/./Common/RenderComponents/Transform.ts?");
+
+/***/ }),
+
+/***/ "./Common/RenderComponents/Vector2.ts":
+/*!********************************************!*\
+  !*** ./Common/RenderComponents/Vector2.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.Vector2 = void 0;\nvar Vector2 = /** @class */ (function () {\n    function Vector2(x, y) {\n        this.X = x;\n        this.Y = y;\n    }\n    return Vector2;\n}());\nexports.Vector2 = Vector2;\n\n\n//# sourceURL=webpack://Assigment/./Common/RenderComponents/Vector2.ts?");
+
+/***/ }),
+
 /***/ "./Common/ScoreCounter.ts":
 /*!********************************!*\
   !*** ./Common/ScoreCounter.ts ***!
@@ -26,7 +76,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexpo
   \*****************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar ScoreCounter_1 = __webpack_require__(/*! ./Common/ScoreCounter */ \"./Common/ScoreCounter.ts\");\nvar startContainer = document.querySelector(\".start_container\");\nstartContainer.addEventListener(\"click\", function () {\n    startContainer.classList.add(\"hidden\");\n    setTimeout(function () {\n        // Create an instance of the ScoreCounter class\n        var scoreCounter = new ScoreCounter_1.ScoreCounter();\n        // Call the startCounter method to start the score counter\n        scoreCounter.startCounter();\n        startContainer.style.display = \"none\";\n        var playContainer = document.querySelector(\".play_container\");\n        playContainer.style.display = \"flex\";\n        var canvas = document.querySelector('canvas');\n        // Set the canvas width and height to match the window size\n        canvas.width = 300;\n        canvas.height = 260;\n        // Get the canvas drawing context\n        var ctx = canvas.getContext('2d');\n        // Listen for mouse movement events\n        window.addEventListener('mousemove', function (event) {\n            // Clear the canvas on each frame\n            var canvasRect = canvas.getBoundingClientRect();\n            // Get the mouse position\n            var mouseX = event.clientX - canvasRect.left;\n            var mouseY = event.clientY - canvasRect.top;\n            ctx.clearRect(0, 0, canvas.width, canvas.height);\n            // Draw a square centered on the mouse position\n            var squareSize = 20;\n            var squareX = mouseX - squareSize / 2;\n            if (squareX > 280) {\n                squareX = 280;\n            }\n            else if (squareX < 0) {\n                squareX = 0;\n            }\n            var squareY = mouseY - squareSize / 2;\n            if (squareY > 240) {\n                squareY = 240;\n            }\n            else if (squareY < 0) {\n                squareY = 0;\n            }\n            ctx.fillStyle = 'brown';\n            ctx.strokeStyle = 'black'; // set the color of the border\n            ctx.fillRect(squareX, squareY, squareSize, squareSize);\n            ctx.strokeRect(squareX + 0.5, squareY + 0.5, squareSize - 1, squareSize - 1); // draw the square with a border\n        });\n    }, 1000);\n});\n\n\n//# sourceURL=webpack://Assigment/./test.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar ScoreCounter_1 = __webpack_require__(/*! ./Common/ScoreCounter */ \"./Common/ScoreCounter.ts\");\nvar Player_1 = __webpack_require__(/*! ./Common/Player */ \"./Common/Player.ts\");\nvar Canvas_1 = __webpack_require__(/*! ./Common/RenderComponents/Canvas */ \"./Common/RenderComponents/Canvas.ts\");\nvar startContainer = document.querySelector(\".start_container\");\nstartContainer.addEventListener(\"click\", function () {\n    startContainer.classList.add(\"hidden\");\n    setTimeout(function () {\n        // Create an instance of the ScoreCounter class\n        var scoreCounter = new ScoreCounter_1.ScoreCounter();\n        // Call the startCounter method to start the score counter\n        scoreCounter.startCounter();\n        startContainer.style.display = \"none\";\n        var playContainer = document.querySelector(\".play_container\");\n        playContainer.style.display = \"flex\";\n        var canvasObj = new Canvas_1.Canvas();\n        var player = new Player_1.Player();\n        setInterval(function () {\n            canvasObj.clear();\n            player.render();\n        }, 5);\n    }, 1000);\n});\n\n\n//# sourceURL=webpack://Assigment/./test.ts?");
 
 /***/ })
 
