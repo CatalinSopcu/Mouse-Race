@@ -10,7 +10,7 @@ export class Canvas {
         this.Canvas.height = CanvasConstants.HEIGHT;
     }
 
-    public draw(transform: Transform): void {
+    public drawRect(transform: Transform): void {
         const objPos = transform.getPosition();
         const objSize = transform.getSize();
         const objColor = transform.getColor();
@@ -27,5 +27,9 @@ export class Canvas {
     public getRectangle(): DOMRect {
         const canvasRect = this.Canvas.getBoundingClientRect();
         return canvasRect;
+    }
+
+    public getCanvasRenderingContext(): CanvasRenderingContext2D {
+        return this.Canvas.getContext('2d') as CanvasRenderingContext2D;
     }
 }

@@ -15,18 +15,24 @@ export class Player implements IRendable {
     constructor() {
         this.Transform.setSize(new Vector2(this.PLAYER_XSIZE, this.PLAYER_YSIZE));
         this.Transform.setColor(this.PLAYER_COLOR);
-        this.setMouseOverEvent();
+        this.setMouseMoveEvent();
     }
 
     public render(): void {
-        this.Canvas.draw(this.Transform);
+        const renderingContext = this.Canvas.getCanvasRenderingContext();
+        const objPos = this.Transform.getPosition();
+        const objSize = this.Transform.getSize();
+        const objColor = this.Transform.getColor();
+
+        renderingContext.fillStyle = objColor;
+        renderingContext.fillRect(objPos.X, objPos.Y, objSize.X, objSize.Y);
     }
 
     public getTransform(): Transform {
         return this.Transform;
     }
 
-    private setMouseOverEvent() {
+    private setMouseMoveEvent() {
         window.addEventListener('mousemove', event => {
             const playerSize = this.Transform.getSize();
             const canvasRect = this.Canvas.getRectangle();
