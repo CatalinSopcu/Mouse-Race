@@ -8,8 +8,8 @@ export class Player implements IRendable {
     private Transform: Transform = new Transform();
     private Canvas: Canvas = new Canvas(); 
 
-    private readonly PLAYER_XSIZE: number = 20;
-    private readonly PLAYER_YSIZE: number = 20;
+    private readonly PLAYER_XSIZE: number = 17;
+    private readonly PLAYER_YSIZE: number = 17;
     private readonly PLAYER_COLOR: string = "brown";
 
     constructor() {

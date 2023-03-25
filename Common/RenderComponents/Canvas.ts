@@ -1,4 +1,3 @@
-import { Transform } from "../RenderComponents/Transform";
 import { CanvasConstants } from "../Constants/CanvasConstants";
 
 export class Canvas {
@@ -8,15 +7,6 @@ export class Canvas {
         this.Canvas = document.querySelector('canvas') as HTMLCanvasElement;
         this.Canvas.width = CanvasConstants.WIDTH;
         this.Canvas.height = CanvasConstants.HEIGHT;
-    }
-
-    public drawRect(transform: Transform): void {
-        const objPos = transform.getPosition();
-        const objSize = transform.getSize();
-        const objColor = transform.getColor();
-        const ctx = this.Canvas.getContext('2d') as CanvasRenderingContext2D;
-        ctx.fillStyle = objColor;
-        ctx.fillRect(objPos.X, objPos.Y, objSize.X, objSize.Y);
     }
 
     public clear(): void {
