@@ -32,6 +32,10 @@ export class Transform{
         return this.Velocity;
     }
 
+    public setVelocity(newVelocity: Vector2): void {
+        this.Velocity = newVelocity;
+    }
+
     public getColor(): string {
         return this.Color;
     }

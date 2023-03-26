@@ -2,7 +2,7 @@ import { Transform } from "./RenderComponents/Transform";
 import { Vector2 } from "./RenderComponents/Vector2";
 import { Canvas } from "./RenderComponents/Canvas";
 import { CanvasConstants } from "./Constants/CanvasConstants";
-import { IRenderable } from "./Interfaces/IRendable";
+import { IRenderable } from "./Interfaces/IRenderable";
 
 export class Player implements IRenderable {
     private Transform: Transform = new Transform();

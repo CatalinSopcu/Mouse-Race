@@ -13,6 +13,8 @@ export class Random extends Element {
     protected Canvas: Canvas = new Canvas();
 
     private CanSpawn: boolean = false;
+    private LastXCollision: number = 0;
+    private LastYCollision: number = 0;
 
     constructor() {
         super();
@@ -31,6 +33,7 @@ export class Random extends Element {
         if (this.Transform.collide(this.Player.getTransform())) {
             this.onCollision();
         }
+        this.updateTransform();
         this.draw();
     }
 
@@ -38,6 +41,22 @@ export class Random extends Element {
         console.log("A collision with an random element has occur.");
         var uiManager = UIManager.getInstance();
         uiManager.endState();
+    }
+
+    protected spawn() {
+        const randomSizeNumber = this.getRandomNumber(ElementsConstants.MIN_SIZE, ElementsConstants.MAX_SIZE);
+        const objSize = new Vector2(randomSizeNumber, randomSizeNumber);
+        this.Transform.setSize(objSize);
+
+        const randomPosX = this.getRandomNumber(1, CanvasConstants.WIDTH - objSize.X);
+        const randomPosY = this.getRandomNumber(1, CanvasConstants.HEIGHT - objSize.Y);
+        const objPosition = new Vector2(randomPosX, randomPosY);
+        this.Transform.setPosition(objPosition);
+        
+        const randomVelocityX = this.getRandomNumber(ElementsConstants.MIN_SPEED, ElementsConstants.MAX_SPEED);
+        const randomVelocityY = this.getRandomNumber(ElementsConstants.MIN_SPEED, ElementsConstants.MAX_SPEED);
+        const objVelocity = new Vector2(randomVelocityX, randomVelocityY);
+        this.Transform.setVelocity(objVelocity);
     }
 
     protected override draw() {
@@ -55,5 +74,36 @@ export class Random extends Element {
         renderingContext.lineTo(objPos.X, objPos.Y + objSize.Y / 2.5);
         renderingContext.closePath();
         renderingContext.fill();
+    }
+
+    protected updateTransform() {
+        const objPos = this.Transform.getPosition();
+        const objSize = this.Transform.getSize();
+        const objVelocity = this.Transform.getVelocity();
+
+        var fixedVelocityX = objVelocity.X;
+        if (objPos.X < 0) {
+            this.getRandomNumber(1, CanvasConstants.WIDTH);
+            fixedVelocityX = this.getRandomNumber(ElementsConstants.MIN_SPEED, ElementsConstants.MAX_SPEED);
+        }
+        else if (objPos.X + objSize.X > CanvasConstants.WIDTH) {
+            fixedVelocityX = (this.getRandomNumber(ElementsConstants.MIN_SPEED, ElementsConstants.MAX_SPEED)) * (-1);
+        }
+
+        var fixedVelocityY = objVelocity.Y;
+        if (objPos.Y < 0 ) {
+            fixedVelocityY = this.getRandomNumber(ElementsConstants.MIN_SPEED, ElementsConstants.MAX_SPEED);
+        }
+        else if (objPos.Y + objSize.Y > CanvasConstants.HEIGHT) {
+            fixedVelocityY = (this.getRandomNumber(ElementsConstants.MIN_SPEED, ElementsConstants.MAX_SPEED)) * (-1);
+        }
+
+        const newVelocity = new Vector2(fixedVelocityX, fixedVelocityY);
+        this.Transform.setVelocity(newVelocity);
+
+        const newPosX = objPos.X + newVelocity.X;
+        const newPosY = objPos.Y + newVelocity.Y;
+        const newPosition = new Vector2(newPosX, newPosY);
+        this.Transform.setPosition(newPosition);
     }
 }

@@ -5,7 +5,7 @@ import { Canvas } from "./RenderComponents/Canvas";
 import { Escape } from "./GameComponents/Escape";
 import { Chase } from "./GameComponents/Chase";
 import { UIManager } from "./UIManager";
-import { IRenderable } from "./Interfaces/IRendable";
+import { IRenderable } from "./Interfaces/IRenderable";
 
 export class GameManager {
     private Renderables: IRenderable[];

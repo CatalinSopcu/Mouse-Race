@@ -4,7 +4,7 @@ import { Canvas } from "../RenderComponents/Canvas";
 import { Vector2 } from "../RenderComponents/Vector2";
 import { ElementsConstants } from "../Constants/ElementsConstants";
 import { CanvasConstants } from "../Constants/CanvasConstants";
-import { IRenderable } from "../Interfaces/IRendable";
+import { IRenderable } from "../Interfaces/IRenderable";
 
 export abstract class Element implements IRenderable {
     protected Transform: Transform = new Transform(); 
@@ -39,13 +39,17 @@ export abstract class Element implements IRenderable {
     }
 
     protected spawn() {
-        const randomSizeNumber = Math.floor(Math.random() * (ElementsConstants.MAX_SIZE - ElementsConstants.MIN_SIZE)) + ElementsConstants.MIN_SIZE;
+        const randomSizeNumber = this.getRandomNumber(ElementsConstants.MIN_SIZE, ElementsConstants.MAX_SIZE);
         const objSize = new Vector2(randomSizeNumber, randomSizeNumber);
         this.Transform.setSize(objSize);
 
-        const randomPosX = Math.floor(Math.random() * (CanvasConstants.WIDTH - randomSizeNumber)) + 1;
-        const randomPosY = Math.floor(Math.random() * (CanvasConstants.HEIGHT - randomSizeNumber)) + 1;
+        const randomPosX = this.getRandomNumber(1, CanvasConstants.WIDTH - objSize.X);
+        const randomPosY = this.getRandomNumber(1, CanvasConstants.HEIGHT - objSize.Y);
         const objPosition = new Vector2(randomPosX, randomPosY);
         this.Transform.setPosition(objPosition);
+    }
+
+    protected getRandomNumber(number1: number, number2: number) : number{
+        return (Math.floor(Math.random() * (number2 - number1)) + number1);
     }
 }

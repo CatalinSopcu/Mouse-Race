@@ -60,7 +60,11 @@ export class Chase extends Element{
         renderingContext.fill();
     }
 
-    protected update() {
-        
-    }
+    /*protected updateTransform() {
+
+        const randomXSpeed = Math.floor(Math.random() * (ElementsConstants.MAX_SPEED - ElementsConstants.MIN_SPEED)) + ElementsConstants.MIN_SPEED;
+        const randomYSpeed = Math.floor(Math.random() * (ElementsConstants.MAX_SPEED - ElementsConstants.MIN_SPEED)) + ElementsConstants.MIN_SPEED;
+        const objVelocity = new Vector2(randomXSpeed, randomYSpeed);
+        this.Transform.setPosition(objPosition);
+    }*/
 }
