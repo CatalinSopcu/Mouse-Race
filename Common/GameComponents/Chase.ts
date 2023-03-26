@@ -14,8 +14,13 @@ export class Chase extends Element{
 
     private CanSpawn: boolean = false;
 
+    private readonly MIN_SPEED: number = 0.2;
+    private readonly MAX_SPEED: number = 0.5;
+
+    private static InstanceCount: number = 0;
     constructor() {
         super();
+        Chase.InstanceCount++;
         this.spawn();
         setTimeout(() => {
             this.CanSpawn = true;
@@ -31,6 +36,7 @@ export class Chase extends Element{
         if (this.Transform.collide(this.Player.getTransform())) {
             this.onCollision();
         }
+        this.updateTransform();
         this.draw();
     }
 
@@ -38,6 +44,22 @@ export class Chase extends Element{
         console.log("A collision with an chase element has occur.");
         var uiManager = UIManager.getInstance();
         uiManager.endState();
+    }
+
+    protected spawn() {
+        const randomSizeNumber = this.getRandomNumber(ElementsConstants.MIN_SIZE, ElementsConstants.MAX_SIZE);
+        const objSize = new Vector2(randomSizeNumber, randomSizeNumber);
+        this.Transform.setSize(objSize);
+
+        const randomPosX = this.getRandomNumber(1, CanvasConstants.WIDTH - objSize.X);
+        const randomPosY = this.getRandomNumber(1, CanvasConstants.HEIGHT - objSize.Y);
+        const objPosition = new Vector2(randomPosX, randomPosY);
+        this.Transform.setPosition(objPosition);
+
+        const randomVelocityX = this.getRandomNumber(this.MIN_SPEED+ (Chase.InstanceCount * 0.05), this.MAX_SPEED );
+        const randomVelocityY = this.getRandomNumber(this.MIN_SPEED + (Chase.InstanceCount * 0.05), this.MAX_SPEED );
+        const objVelocity = new Vector2(randomVelocityX, randomVelocityY);
+        this.Transform.setVelocity(objVelocity);
     }
 
     protected override draw() {
@@ -60,11 +82,48 @@ export class Chase extends Element{
         renderingContext.fill();
     }
 
-    /*protected updateTransform() {
+    protected updateTransform() {
+        const objPos = this.Transform.getPosition();
+        const objSize = this.Transform.getSize();
+        const objVelocity = this.Transform.getVelocity();
 
-        const randomXSpeed = Math.floor(Math.random() * (ElementsConstants.MAX_SPEED - ElementsConstants.MIN_SPEED)) + ElementsConstants.MIN_SPEED;
-        const randomYSpeed = Math.floor(Math.random() * (ElementsConstants.MAX_SPEED - ElementsConstants.MIN_SPEED)) + ElementsConstants.MIN_SPEED;
-        const objVelocity = new Vector2(randomXSpeed, randomYSpeed);
-        this.Transform.setPosition(objPosition);
-    }*/
+        const playerPos = this.Player.getTransform().getPosition();
+        var fixedVelocityX = 0;
+        if (objPos.X < playerPos.X) {
+            fixedVelocityX = Math.abs(objVelocity.X);
+        }
+        else {
+            fixedVelocityX = -Math.abs(objVelocity.X);
+        }
+
+        var fixedVelocityY = 0;
+        if (objPos.Y < playerPos.Y) {
+            fixedVelocityY = Math.abs(objVelocity.Y);
+        }
+        else {
+            fixedVelocityY = -Math.abs(objVelocity.Y);
+        }
+
+        const newVelocity = new Vector2(fixedVelocityX, fixedVelocityY);
+        this.Transform.setVelocity(newVelocity);
+
+        var fixedPositionX = objPos.X + newVelocity.X;
+        if (fixedPositionX < 0) {
+            fixedPositionX = 0;
+        }
+        else if (fixedPositionX + objSize.X > CanvasConstants.WIDTH) {
+            fixedPositionX = CanvasConstants.WIDTH - objSize.X;
+        }
+
+        var fixedPositionY = objPos.Y + newVelocity.Y;
+        if (fixedPositionY < 0) {
+            fixedPositionY = 0;
+        }
+        else if (fixedPositionY + objSize.Y > CanvasConstants.HEIGHT) {
+            fixedPositionY = CanvasConstants.HEIGHT - objSize.Y;
+        }
+
+        const newPosition = new Vector2(fixedPositionX, fixedPositionY);
+        this.Transform.setPosition(newPosition);
+    }
 }

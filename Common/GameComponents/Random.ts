@@ -13,8 +13,9 @@ export class Random extends Element {
     protected Canvas: Canvas = new Canvas();
 
     private CanSpawn: boolean = false;
-    private LastXCollision: number = 0;
-    private LastYCollision: number = 0;
+
+    public readonly MIN_SPEED: number = 0.2;
+    public readonly MAX_SPEED: number = 2;
 
     constructor() {
         super();
@@ -52,9 +53,9 @@ export class Random extends Element {
         const randomPosY = this.getRandomNumber(1, CanvasConstants.HEIGHT - objSize.Y);
         const objPosition = new Vector2(randomPosX, randomPosY);
         this.Transform.setPosition(objPosition);
-        
-        const randomVelocityX = this.getRandomNumber(ElementsConstants.MIN_SPEED, ElementsConstants.MAX_SPEED);
-        const randomVelocityY = this.getRandomNumber(ElementsConstants.MIN_SPEED, ElementsConstants.MAX_SPEED);
+
+        const randomVelocityX = this.getRandomNumber(this.MIN_SPEED, this.MAX_SPEED) * this.getRandomNumber(0.1, 1);
+        const randomVelocityY = this.getRandomNumber(this.MIN_SPEED, this.MAX_SPEED) * this.getRandomNumber(-1, -0.1);
         const objVelocity = new Vector2(randomVelocityX, randomVelocityY);
         this.Transform.setVelocity(objVelocity);
     }
@@ -83,19 +84,18 @@ export class Random extends Element {
 
         var fixedVelocityX = objVelocity.X;
         if (objPos.X < 0) {
-            this.getRandomNumber(1, CanvasConstants.WIDTH);
-            fixedVelocityX = this.getRandomNumber(ElementsConstants.MIN_SPEED, ElementsConstants.MAX_SPEED);
+            fixedVelocityX = this.getRandomNumber(this.MIN_SPEED, this.MAX_SPEED);
         }
         else if (objPos.X + objSize.X > CanvasConstants.WIDTH) {
-            fixedVelocityX = (this.getRandomNumber(ElementsConstants.MIN_SPEED, ElementsConstants.MAX_SPEED)) * (-1);
+            fixedVelocityX = (this.getRandomNumber(this.MIN_SPEED, this.MAX_SPEED)) * (-1);
         }
 
         var fixedVelocityY = objVelocity.Y;
         if (objPos.Y < 0 ) {
-            fixedVelocityY = this.getRandomNumber(ElementsConstants.MIN_SPEED, ElementsConstants.MAX_SPEED);
+            fixedVelocityY = this.getRandomNumber(this.MIN_SPEED, this.MAX_SPEED);
         }
         else if (objPos.Y + objSize.Y > CanvasConstants.HEIGHT) {
-            fixedVelocityY = (this.getRandomNumber(ElementsConstants.MIN_SPEED, ElementsConstants.MAX_SPEED)) * (-1);
+            fixedVelocityY = (this.getRandomNumber(this.MIN_SPEED, this.MAX_SPEED)) * (-1);
         }
 
         const newVelocity = new Vector2(fixedVelocityX, fixedVelocityY);
