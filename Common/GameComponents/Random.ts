@@ -68,11 +68,9 @@ export class Random extends Element {
         const renderingContext = this.Canvas.getCanvasRenderingContext();
         renderingContext.fillStyle = objColor;
         renderingContext.beginPath();
-        renderingContext.moveTo(objPos.X + objSize.X / 2, objPos.Y);
-        renderingContext.lineTo(objPos.X + objSize.X, objPos.Y + objSize.Y / 2.5);
-        renderingContext.lineTo(objPos.X + 4 * objSize.X / 5, objPos.Y + objSize.Y);
-        renderingContext.lineTo(objPos.X + objSize.X / 5, objPos.Y + objSize.Y);
-        renderingContext.lineTo(objPos.X, objPos.Y + objSize.Y / 2.5);
+        renderingContext.moveTo(objPos.X, objPos.Y);
+        renderingContext.lineTo(objPos.X + objSize.X, objPos.Y);
+        renderingContext.lineTo(objPos.X + (objSize.X/2), objPos.Y + objSize.Y);
         renderingContext.closePath();
         renderingContext.fill();
     }

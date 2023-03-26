@@ -15,7 +15,7 @@ export class Chase extends Element{
     private CanSpawn: boolean = false;
 
     private readonly MIN_SPEED: number = 0.2;
-    private readonly MAX_SPEED: number = 0.5;
+    private readonly MAX_SPEED: number = 0.4;
 
     private static InstanceCount: number = 0;
     constructor() {
