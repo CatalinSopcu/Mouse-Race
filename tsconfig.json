@@ -3,13 +3,5 @@
     "target": "es5",
     "module": "commonjs",
     "sourceMap": true
-  },
-  "files": [
-    "test.ts",
-    "Common/GameComponents/Element.ts",
-    "Common/GameComponents/Chase.ts",
-    "Common/GameComponents/Random.ts",
-    "Common/GameComponents/Escape.ts",
-    "Common/Constants/CanvasConstants.ts"
-  ]
+  }
 }

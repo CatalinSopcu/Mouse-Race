@@ -1,6 +1,6 @@
 module.exports = {
     mode: "development",
-    entry: "./test.ts",
+    entry: "./main.ts",
     output: {
         filename: 'bundle.js',
         path: __dirname + '/dist'

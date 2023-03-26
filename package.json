@@ -2,7 +2,7 @@
   "name": "Assigment",
   "version": "1.0.0",
   "description": "",
-  "main": "test.js",
+  "main": "main.js",
   "devDependencies": {
     "ts-loader": "^9.4.2",
     "webpack": "^5.76.3",

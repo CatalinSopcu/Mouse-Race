@@ -37,7 +37,7 @@ export class Chase extends Element{
     protected override onCollision(): void {
         console.log("A collision with an chase element has occur.");
         var uiManager = UIManager.getInstance();
-        uiManager.endGame();
+        uiManager.endState();
     }
 
     protected override draw() {

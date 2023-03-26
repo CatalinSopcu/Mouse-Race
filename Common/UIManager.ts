@@ -31,10 +31,12 @@ export class UIManager {
         return UIManager.instance;
     }
 
-    public startGame(): void {
+    public playState(): void {
         if (this.GameStarted) {
             return;
         }
+        this.Counter = 0;
+        this.PlayCounter.innerHTML = "Score: " + this.Counter;
         this.GameStarted = true;
         this.changeComponentStatus(false, this.StartComponent);
         this.changeComponentStatus(true, this.PlayComponent);
@@ -48,7 +50,7 @@ export class UIManager {
         }, ElementsConstants.SPAWN_TIME);
     }
 
-    public endGame(): void {
+    public endState(): void {
         clearInterval(this.IntervalId);    
         this.FinalScore.innerHTML = this.Counter.toString();
         this.changeComponentStatus(false, this.PlayComponent);

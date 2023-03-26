@@ -4,9 +4,9 @@ import { Canvas } from "../RenderComponents/Canvas";
 import { Vector2 } from "../RenderComponents/Vector2";
 import { ElementsConstants } from "../Constants/ElementsConstants";
 import { CanvasConstants } from "../Constants/CanvasConstants";
-import { IRendable } from "../Interfaces/IRendable";
+import { IRenderable } from "../Interfaces/IRendable";
 
-export abstract class Element implements IRendable {
+export abstract class Element implements IRenderable {
     protected Transform: Transform = new Transform(); 
     protected Player: Player = new Player();
     protected Canvas: Canvas = new Canvas();

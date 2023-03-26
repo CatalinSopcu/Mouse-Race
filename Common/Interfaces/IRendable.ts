@@ -1,3 +1,3 @@
-export interface IRendable {
+export interface IRenderable {
     render(): void;
 }
