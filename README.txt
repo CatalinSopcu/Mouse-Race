@@ -1,0 +1,1 @@
+Use the command "npm install" and "npm start" to start the game.

@@ -10,7 +10,7 @@ import { UIManager } from "../UIManager";
 export class Escape extends Element {
     protected Transform: Transform = new Transform();
     protected Player: Player = new Player();
-    protected Canvas: Canvas = new Canvas();
+    protected Canvas: Canvas;
 
     private CanSpawn: boolean = false;
 
@@ -19,6 +19,7 @@ export class Escape extends Element {
 
     constructor() {
         super();
+        this.Canvas = Canvas.getInstance();
         this.spawn();
         setTimeout(() => {
             this.CanSpawn = true;

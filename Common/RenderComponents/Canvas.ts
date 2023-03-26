@@ -1,12 +1,20 @@
 import { CanvasConstants } from "../Constants/CanvasConstants";
 
 export class Canvas {
+    private static instance: Canvas;
     private Canvas: HTMLCanvasElement;
 
-    constructor() {
+    private constructor() {
         this.Canvas = document.querySelector('canvas') as HTMLCanvasElement;
         this.Canvas.width = CanvasConstants.WIDTH;
         this.Canvas.height = CanvasConstants.HEIGHT;
+    }
+
+    public static getInstance(): Canvas {
+        if (!Canvas.instance) {
+            Canvas.instance = new Canvas();
+        }
+        return Canvas.instance;
     }
 
     public clear(): void {

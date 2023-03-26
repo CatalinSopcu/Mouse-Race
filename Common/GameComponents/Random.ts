@@ -10,7 +10,7 @@ import { UIManager } from "../UIManager";
 export class Random extends Element {
     protected Transform: Transform = new Transform();
     protected Player: Player = new Player();
-    protected Canvas: Canvas = new Canvas();
+    protected Canvas: Canvas;
 
     private CanSpawn: boolean = false;
 
@@ -19,6 +19,7 @@ export class Random extends Element {
 
     constructor() {
         super();
+        this.Canvas = Canvas.getInstance();
         this.spawn();
         setTimeout(() => {
             this.CanSpawn = true;
@@ -44,7 +45,7 @@ export class Random extends Element {
         uiManager.endState();
     }
 
-    protected spawn() {
+    protected override spawn() {
         const randomSizeNumber = this.getRandomNumber(ElementsConstants.MIN_SIZE, ElementsConstants.MAX_SIZE);
         const objSize = new Vector2(randomSizeNumber, randomSizeNumber);
         this.Transform.setSize(objSize);

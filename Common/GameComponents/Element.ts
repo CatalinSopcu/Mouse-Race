@@ -9,13 +9,14 @@ import { IRenderable } from "../Interfaces/IRenderable";
 export abstract class Element implements IRenderable {
     protected Transform: Transform = new Transform(); 
     protected Player: Player = new Player();
-    protected Canvas: Canvas = new Canvas();
+    protected Canvas: Canvas;
 
     constructor() {
         this.Transform.setColor(ElementsConstants.UNKNOWN_COLOR);
     }
 
     public render(): void {
+        this.Canvas = Canvas.getInstance();
         if (this.Transform.collide(this.Player.getTransform())) {
             this.onCollision();
         }

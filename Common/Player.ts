@@ -6,13 +6,14 @@ import { IRenderable } from "./Interfaces/IRenderable";
 
 export class Player implements IRenderable {
     private Transform: Transform = new Transform();
-    private Canvas: Canvas = new Canvas(); 
+    private Canvas: Canvas;
 
     private readonly PLAYER_XSIZE: number = 17;
     private readonly PLAYER_YSIZE: number = 17;
     private readonly PLAYER_COLOR: string = "brown";
 
     constructor() {
+        this.Canvas = Canvas.getInstance();
         this.Transform.setSize(new Vector2(this.PLAYER_XSIZE, this.PLAYER_YSIZE));
         this.Transform.setColor(this.PLAYER_COLOR);
         this.setMouseMoveEvent();

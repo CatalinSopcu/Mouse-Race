@@ -10,7 +10,7 @@ import { UIManager } from "../UIManager";
 export class Chase extends Element{
     protected Transform: Transform = new Transform();
     protected Player: Player = new Player();
-    protected Canvas: Canvas = new Canvas();
+    protected Canvas: Canvas;
 
     private CanSpawn: boolean = false;
 
@@ -18,8 +18,10 @@ export class Chase extends Element{
     private readonly MAX_SPEED: number = 0.4;
 
     private static InstanceCount: number = 0;
+
     constructor() {
         super();
+        this.Canvas = Canvas.getInstance();
         Chase.InstanceCount++;
         this.spawn();
         setTimeout(() => {
@@ -46,7 +48,7 @@ export class Chase extends Element{
         uiManager.endState();
     }
 
-    protected spawn() {
+    protected override spawn() {
         const randomSizeNumber = this.getRandomNumber(ElementsConstants.MIN_SIZE, ElementsConstants.MAX_SIZE);
         const objSize = new Vector2(randomSizeNumber, randomSizeNumber);
         this.Transform.setSize(objSize);

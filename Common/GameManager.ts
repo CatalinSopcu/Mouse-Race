@@ -46,7 +46,7 @@ export class GameManager {
         }
         var uiManager = UIManager.getInstance();
         uiManager.playState();
-        const canvas = new Canvas();
+        const canvas = Canvas.getInstance();
         this.IntervalId = setInterval(() => {
             canvas.clear();
             this.Renderables.forEach(renderable => renderable.render());
