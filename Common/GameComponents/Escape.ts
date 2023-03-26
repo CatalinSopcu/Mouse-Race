@@ -5,19 +5,29 @@ import { Canvas } from "../RenderComponents/Canvas";
 import { Vector2 } from "../RenderComponents/Vector2";
 import { ElementsConstants } from "../Constants/ElementsConstants";
 import { CanvasConstants } from "../Constants/CanvasConstants";
+import { UIManager } from "../UIManager";
 
 export class Escape extends Element {
     protected Transform: Transform = new Transform();
     protected Player: Player = new Player();
     protected Canvas: Canvas = new Canvas();
 
+    private CanSpawn: boolean = false;
+
     constructor() {
         super();
         this.spawn();
-        this.Transform.setColor(ElementsConstants.ESCAPE_COLOR);
+        setTimeout(() => {
+            this.CanSpawn = true;
+            this.Transform.setColor(ElementsConstants.ESCAPE_COLOR);
+        }, ElementsConstants.SPAWN_TIME);
     }
 
     public override render(): void {
+        if (!this.CanSpawn) {
+            super.draw();
+            return;
+        }
         if (this.Transform.collide(this.Player.getTransform())) {
             this.onCollision();
         }
@@ -26,6 +36,9 @@ export class Escape extends Element {
 
     protected override onCollision(): void {
         console.log("A collision with an escape element has occur.");
+        var uiManager = UIManager.getInstance();
+        uiManager.addScore(ElementsConstants.ESCAPE_POINTS);
+        this.spawn();
     }
 
     protected override draw() {

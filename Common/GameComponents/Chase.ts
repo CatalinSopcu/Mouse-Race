@@ -5,19 +5,29 @@ import { Canvas } from "../RenderComponents/Canvas";
 import { Vector2 } from "../RenderComponents/Vector2";
 import { ElementsConstants } from "../Constants/ElementsConstants";
 import { CanvasConstants } from "../Constants/CanvasConstants";
+import { UIManager } from "../UIManager";
 
 export class Chase extends Element{
     protected Transform: Transform = new Transform();
     protected Player: Player = new Player();
     protected Canvas: Canvas = new Canvas();
 
+    private CanSpawn: boolean = false;
+
     constructor() {
         super();
         this.spawn();
-        this.Transform.setColor(ElementsConstants.CHASE_COLOR);
+        setTimeout(() => {
+            this.CanSpawn = true;
+            this.Transform.setColor(ElementsConstants.CHASE_COLOR);
+        }, ElementsConstants.SPAWN_TIME);
     }
 
-    public render(): void {
+    public override render(): void {
+        if (!this.CanSpawn) {
+            super.draw();
+            return;
+        }
         if (this.Transform.collide(this.Player.getTransform())) {
             this.onCollision();
         }
@@ -26,6 +36,8 @@ export class Chase extends Element{
 
     protected override onCollision(): void {
         console.log("A collision with an chase element has occur.");
+        var uiManager = UIManager.getInstance();
+        uiManager.endGame();
     }
 
     protected override draw() {
@@ -46,5 +58,9 @@ export class Chase extends Element{
         renderingContext.lineTo(objPos.X, objPos.Y + objSize.Y / 4);
         renderingContext.closePath();
         renderingContext.fill();
+    }
+
+    protected update() {
+        
     }
 }

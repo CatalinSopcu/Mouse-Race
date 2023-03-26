@@ -1,4 +1,4 @@
 export class CanvasConstants {
-    public static readonly WIDTH: number = 300;
-    public static readonly HEIGHT: number = 260;
+    public static readonly WIDTH: number = 400;
+    public static readonly HEIGHT: number = 360;
 }

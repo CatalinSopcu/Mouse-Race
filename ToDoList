@@ -1,4 +1,9 @@
-daca se colide cu ceva, dai spawn din nou
-endGame design
-uiManager class
+dai spawn din nou doar la escape element       X
+endGame design                                 X
+uiManager class								   X
 elements movements
+invincibilate 2 secunde la inceputul jocului   X
+forme diferite                                 ?
+play again                                     ?
+better collision                               ?
+clase cu active si inactive                    X

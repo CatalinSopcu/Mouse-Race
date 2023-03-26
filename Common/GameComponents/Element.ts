@@ -11,7 +11,9 @@ export abstract class Element implements IRendable {
     protected Player: Player = new Player();
     protected Canvas: Canvas = new Canvas();
 
-    constructor() { }
+    constructor() {
+        this.Transform.setColor(ElementsConstants.UNKNOWN_COLOR);
+    }
 
     public render(): void {
         if (this.Transform.collide(this.Player.getTransform())) {
@@ -31,7 +33,7 @@ export abstract class Element implements IRendable {
         const objColor = this.Transform.getColor();
 
         renderingContext.lineWidth = 2;
-        renderingContext.strokeStyle = objColor; //pune toate culorile in ElementsConstants
+        renderingContext.strokeStyle = objColor;
 
         renderingContext.strokeRect(objPos.X, objPos.Y, objSize.X, objSize.Y);
     }
@@ -45,7 +47,5 @@ export abstract class Element implements IRendable {
         const randomPosY = Math.floor(Math.random() * (CanvasConstants.HEIGHT - randomSizeNumber)) + 1;
         const objPosition = new Vector2(randomPosX, randomPosY);
         this.Transform.setPosition(objPosition);
-
-        this.Transform.setColor(ElementsConstants.UNKNOWN_COLOR);
     }
 }
